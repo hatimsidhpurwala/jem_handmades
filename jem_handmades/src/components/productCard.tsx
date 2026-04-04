@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     'wedding-glitter',
     'liquid-blush',
     'lip-lustre',
-    'concealer-stick',
+    //'concealer-stick',
   ];
 
 const canTryOn = [
@@ -40,7 +40,7 @@ const canTryOn = [
   'highlighter',
   'eyedeal-kajal',
   'eyeliner',
-  'concealer-stick'
+  //'concealer-stick'
 ].includes(product.category);
   return (
     <div className="group rounded-lg border border-border bg-card overflow-hidden transition-shadow hover:shadow-luxury">
