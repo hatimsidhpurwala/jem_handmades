@@ -78,6 +78,7 @@ const CATEGORY_TO_TAB: Record<string, MakeupTab> = {
   'eyeliner':       'eyeliner',
   'eyedeal-kajal':  'eyeliner',
   'concealer-sticks': 'lipstick'
+  
 };
 
 const TAB_LABELS: Record<MakeupTab, string> = {
@@ -90,10 +91,12 @@ const TAB_LABELS: Record<MakeupTab, string> = {
 
 export default function TryOn() {
  const [searchParams] = useSearchParams();
-const paramCategory = searchParams.get('category') ?? '';
-const paramHex      = searchParams.get('hex') ?? '#C4527A';
-const paramFinish   = (searchParams.get('finish') ?? 'satin') as 'matte'|'satin'|'glossy';
-const paramName     = searchParams.get('name') ?? '';
+const paramCategory  = searchParams.get('category') ?? '';
+const paramHex       = searchParams.get('hex') ?? '#C4527A';
+const paramFinish    = (searchParams.get('finish') ?? 'satin') as 'matte'|'satin'|'glossy';
+const paramName      = searchParams.get('name') ?? '';
+const paramPlacement = searchParams.get('placement') ?? '';
+const paramOpacity   = Number(searchParams.get('opacity') ?? 50) / 100;
 
 const activeTab = CATEGORY_TO_TAB[paramCategory] ?? 'lipstick';
 const [mode, setMode] = useState<Mode>('camera');
@@ -103,10 +106,10 @@ const [makeup, setMakeup] = useState<MakeupState>({
     ...defaultMakeup[activeTab],
     hex: paramHex,
     enabled: true,
+    opacity: paramOpacity,
     ...(activeTab === 'lipstick' ? { finish: paramFinish } : {}),
   },
 });
-
   const [isModelLoading, setIsModelLoading] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -450,27 +453,6 @@ const [makeup, setMakeup] = useState<MakeupState>({
                   />
                 </button>
               </div>
-
-            {/*  {currentLayer.enabled && (
-                <>
-                   Color Presets 
-                  <p className="text-xs text-muted-foreground mb-2">Select Shade</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {PRESETS[activeTab].map(preset => (
-                      <button
-                        key={preset.hex}
-                        title={preset.name}
-                        onClick={() => updateLayer(activeTab, { hex: preset.hex })}
-                        className={`h-8 w-8 rounded-full border-2 transition-transform hover:scale-110 ${
-                          currentLayer.hex === preset.hex
-                            ? 'border-accent scale-110'
-                            : 'border-border'
-                        }`}
-                        style={{ backgroundColor: preset.hex }}
-                      />
-                    ))}
-                  </div>
-*/}
                   {/* Custom Color Picker*/} 
                   <p className="text-xs text-muted-foreground mb-1">Custom Color</p>
                   <input
@@ -480,43 +462,6 @@ const [makeup, setMakeup] = useState<MakeupState>({
                     className="mb-4 h-8 w-full cursor-pointer rounded-md border border-border"
                   />
 
-                  {/* Opacity Slider 
-                  <p className="text-xs text-muted-foreground mb-1">
-                    Intensity: {Math.round(currentLayer.opacity * 100)}%
-                  </p>
-                  <input
-                    type="range"
-                    min={0.1}
-                    max={1}
-                    step={0.05}
-                    value={currentLayer.opacity}
-                    onChange={e => updateLayer(activeTab, { opacity: parseFloat(e.target.value) })}
-                    className="mb-4 w-full accent-accent"
-                  />
-*/}
-                  {/* Finish selector for lipstick only 
-                  {activeTab === 'lipstick' && (
-                    <>
-                      <p className="text-xs text-muted-foreground mb-2">Finish</p>
-                      <div className="flex gap-2">
-                        {(['matte', 'satin', 'glossy'] as const).map(f => (
-                          <button
-                            key={f}
-                            onClick={() => updateLayer('lipstick', { finish: f })}
-                            className={`flex-1 rounded-md py-1.5 text-xs font-medium capitalize transition-colors ${
-                              (makeup.lipstick as LipstickLayer).finish === f
-                                ? 'bg-accent text-accent-foreground'
-                                : 'bg-secondary text-secondary-foreground'
-                            }`}
-                          >
-                            {f}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
-              
-*/}
               {/* Quick Reset */}
               <button
                 onClick={() => setMakeup(defaultMakeup)}
