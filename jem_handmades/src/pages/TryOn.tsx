@@ -431,8 +431,8 @@ const [makeup, setMakeup] = useState<MakeupState>({
     Trying: <span className="font-semibold text-foreground">{paramName}</span>
   </p>
 )}
-
-            {/* Enable/Disable Toggle */}
+              
+            {/* Enable/Disable Toggle*/} 
               <div className="flex items-center justify-between mb-3 rounded-md bg-secondary px-3 py-2">
                 <span className="text-xs font-medium text-secondary-foreground">
                   {TAB_LABELS[activeTab]}
@@ -451,9 +451,9 @@ const [makeup, setMakeup] = useState<MakeupState>({
                 </button>
               </div>
 
-              {currentLayer.enabled && (
+            {/*  {currentLayer.enabled && (
                 <>
-                  {/* Color Presets */}
+                   Color Presets 
                   <p className="text-xs text-muted-foreground mb-2">Select Shade</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {PRESETS[activeTab].map(preset => (
@@ -470,8 +470,8 @@ const [makeup, setMakeup] = useState<MakeupState>({
                       />
                     ))}
                   </div>
-
-                  {/* Custom Color Picker */}
+*/}
+                  {/* Custom Color Picker*/} 
                   <p className="text-xs text-muted-foreground mb-1">Custom Color</p>
                   <input
                     type="color"
@@ -480,7 +480,7 @@ const [makeup, setMakeup] = useState<MakeupState>({
                     className="mb-4 h-8 w-full cursor-pointer rounded-md border border-border"
                   />
 
-                  {/* Opacity Slider */}
+                  {/* Opacity Slider 
                   <p className="text-xs text-muted-foreground mb-1">
                     Intensity: {Math.round(currentLayer.opacity * 100)}%
                   </p>
@@ -493,8 +493,8 @@ const [makeup, setMakeup] = useState<MakeupState>({
                     onChange={e => updateLayer(activeTab, { opacity: parseFloat(e.target.value) })}
                     className="mb-4 w-full accent-accent"
                   />
-
-                  {/* Finish selector for lipstick only */}
+*/}
+                  {/* Finish selector for lipstick only 
                   {activeTab === 'lipstick' && (
                     <>
                       <p className="text-xs text-muted-foreground mb-2">Finish</p>
@@ -515,9 +515,8 @@ const [makeup, setMakeup] = useState<MakeupState>({
                       </div>
                     </>
                   )}
-                </>
-              )}
-
+              
+*/}
               {/* Quick Reset */}
               <button
                 onClick={() => setMakeup(defaultMakeup)}
