@@ -30,18 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     //'concealer-stick',
   ];
 
-const canTryOn = [
-  'jem-lipstick',
-  'soft-matte', 
-  'glossy-liquid',
-  'wedding-glitter',
-  'cream-blush',
-  'liquid-blush',
-  'highlighter',
-  'eyedeal-kajal',
-  'eyeliner',
-  //'concealer-stick'
-].includes(product.category);
+const canTryOn = !!(product as any).makeupPlacement;
   return (
     <div className="group rounded-lg border border-border bg-card overflow-hidden transition-shadow hover:shadow-luxury">
 
@@ -110,7 +99,7 @@ const canTryOn = [
         <div className="mt-3 flex gap-2">
           {canTryOn ? (
             <Link
-to={`/try-on?product=${product.id}&category=${product.category}&hex=${encodeURIComponent(product.hex)}&name=${encodeURIComponent(product.name)}&finish=${product.finish ?? 'satin'}`}
+to={`/try-on?product=${product.id}&category=${product.category}&hex=${encodeURIComponent(product.hex)}&name=${encodeURIComponent(product.name)}&placement=${encodeURIComponent((product as any).makeupPlacement ?? '')}&opacity=${(product as any).defaultOpacity ?? 50}&finish=${encodeURIComponent(product.finish ?? 'satin')}`}
               className="flex-1 rounded-md border border-border bg-background py-2 text-center text-xs font-medium text-foreground transition-colors hover:bg-secondary"
             >
               Try It On
