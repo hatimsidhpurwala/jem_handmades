@@ -29,6 +29,9 @@ export interface ApiProduct {
   tags: string[];
   status: string;
   stock: number;
+  makeupPlacement?: string;
+  finish?: string;
+  defaultOpacity?: number;
   createdAt: string;
   updatedAt: string;
   files: {
@@ -167,7 +170,9 @@ export function mapApiProduct(p: ApiProduct) {
     price:         Number(p.price.value),
     image:         p.files?.[0]?.url ?? '',
     description:   p.description?.join(' • ') ?? '',
-    finish:        p.attributes?.shadeDescription ?? undefined,
+    finish:        p.finish ?? undefined,
     popular:       false,
+    makeupPlacement: p.makeupPlacement ?? '',
+    defaultOpacity:  p.defaultOpacity ?? 50,
   };
 }
