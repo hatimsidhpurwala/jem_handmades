@@ -24,7 +24,7 @@ const App = () => (
           <Navbar />
           <Routes>
             <Route path="/" element={<Navigate to="/shop" replace />} />
-            <Route path="/try-on" element={<TryOn />} />
+            <Route path="/try-on/:productId" element={<TryOn />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/collection" element={<Collection />} />
