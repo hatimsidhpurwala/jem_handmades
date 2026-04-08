@@ -17,19 +17,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     toast.success(`${product.name} added to cart`);
   };
 
-  // Categories where "Try It On" makes sense
-  const tryOnCategories = [
-    'jem-lipstick',
-    'soft-matte',
-    'glossy-liquid',
-    'cream-blush',
-    'highlighter',
-    'wedding-glitter',
-    'liquid-blush',
-    'lip-lustre',
-    //'concealer-stick',
-  ];
-
+  
 const canTryOn = !!(product as any).makeupPlacement;
   return (
     <div className="group rounded-lg border border-border bg-card overflow-hidden transition-shadow hover:shadow-luxury">
@@ -98,15 +86,16 @@ const canTryOn = !!(product as any).makeupPlacement;
         {/* Buttons */}
         <div className="mt-3 flex gap-2">
           {canTryOn ? (
-            <Link
-to={`/try-on?product=${product.id}&category=${product.category}&hex=${encodeURIComponent(product.hex)}&name=${encodeURIComponent(product.name)}&placement=${encodeURIComponent((product as any).makeupPlacement ?? '')}&opacity=${(product as any).defaultOpacity ?? 50}&finish=${encodeURIComponent(product.finish ?? 'satin')}`}
-              className="flex-1 rounded-md border border-border bg-background py-2 text-center text-xs font-medium text-foreground transition-colors hover:bg-secondary"
-            >
-              Try It On
-            </Link>
-          ) : (
-            <span className="flex-1" />
-          )}
+  <Link
+    to={`/try-on/${product.id}`}   // or product._id if that’s what you use
+    className="flex-1 rounded-md border border-border bg-background py-2 text-center text-xs font-medium text-foreground transition-colors hover:bg-secondary"
+  >
+    Try It On
+  </Link>
+) : (
+  <span className="flex-1" />
+)}
+
           <button
             onClick={handleAdd}
             className="flex-1 rounded-md bg-accent py-2 text-xs font-medium text-accent-foreground transition-colors hover:bg-accent/90"
