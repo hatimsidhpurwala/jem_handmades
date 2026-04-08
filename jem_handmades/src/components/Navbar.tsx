@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { to: '/shop', label: 'Shop' },
+  //{ to: '/shop', label: 'Shop' },
 //  { to: '/collection', label: 'Collection' },
-  { to: '/try-on', label: 'Try On' },
+ // { to: '/try-on', label: 'Try On' },
 ];
 
 export default function Navbar() {
